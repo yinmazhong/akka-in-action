@@ -3,9 +3,9 @@ package com.xxh
 import akka.actor.ActorSystem
 import akka.testkit.TestActorRef
 import akka.util.Timeout
-import com.xxh.messages.SetRequests
 import org.scalatest.{FunSpecLike, Matchers}
 
+import scala.com.xxh.messages.SetRequest
 import scala.concurrent.duration._
 
 /**
@@ -21,7 +21,7 @@ class AkkaDbSpec extends FunSpecLike with Matchers{
     describe("give SetRequest"){
       it("should place key/value to map"){
         val actorRef = TestActorRef(new AkkaDB)
-        actorRef ! SetRequests("xu","xianhong")
+        actorRef ! SetRequest("xu","xianhong")
 
         val akkaDb = actorRef.underlyingActor
         akkaDb.map.get("xu") should equal(Some("xianhong"))
